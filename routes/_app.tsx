@@ -1,5 +1,5 @@
 import { type PageProps } from "$fresh/server.ts";
-export default function App({ Component }: PageProps) {
+export default function App({ Component, pattern }: PageProps) {
   return (
     <html>
       <head>
@@ -11,6 +11,16 @@ export default function App({ Component }: PageProps) {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
         />
+        {pattern === "/editor" && (
+          <>
+            <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/vditor/3.10.7/index.min.css"
+            />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vditor/3.10.7/index.min.js">
+            </script>
+          </>
+        )}
       </head>
       <body>
         <Component />
