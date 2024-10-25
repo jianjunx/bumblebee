@@ -1,6 +1,7 @@
 import { type Config } from "tailwindcss";
 import flyonui from "flyonui";
 import flyonuiPlugin from "flyonui/plugin";
+import typography from "@tailwindcss/typography";
 
 export default {
   content: [
@@ -9,6 +10,7 @@ export default {
   ],
   plugins: [
     flyonui,
-    flyonuiPlugin
+    flyonuiPlugin,
+    typography,
   ],
 } satisfies Config;
