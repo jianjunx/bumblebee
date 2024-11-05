@@ -1,19 +1,17 @@
 import type { FreshContext } from "$fresh/server.ts";
-
-interface State {
-  data: string;
-}
+import { authMiddlware } from "../utils/auth.ts";
+import { Failed } from "../utils/resp.ts";
 
 export async function handler(
   req: Request,
-  ctx: FreshContext<State>,
+  ctx: FreshContext,
 ) {
-  if (req.method === "POST") {
-    // return new Response("post", { status: 201 });
-    console.log("post ===");
+  try {
+    ctx.state = { a: "haha" };
+    await authMiddlware(req, ctx);
+    return await ctx.next();
+  } catch (error: any) {
+    console.log(ctx, "ctx");
+    return Failed(`${error.name}：${error.message}`, error.status);
   }
-
-  const resp = await ctx.next();
-  resp.headers.set("server", "fresh server");
-  return resp;
 }
